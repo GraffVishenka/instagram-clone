@@ -58,7 +58,6 @@ export async function saveUserToDB(user: {
   }
 }
 
-// ============================== SIGN IN
 export async function signInAccount(user: { email: string; password: string }) {
   try {
     const session = await account.createEmailSession(user.email, user.password);
@@ -69,7 +68,6 @@ export async function signInAccount(user: { email: string; password: string }) {
   }
 }
 
-// ============================== GET ACCOUNT
 export async function getAccount() {
   try {
     const currentAccount = await account.get();
@@ -80,7 +78,6 @@ export async function getAccount() {
   }
 }
 
-// ============================== GET USER
 export async function getCurrentUser() {
   try {
     const currentAccount = await getAccount();
@@ -102,7 +99,6 @@ export async function getCurrentUser() {
   }
 }
 
-// ============================== SIGN OUT
 export async function signOutAccount() {
   try {
     const session = await account.deleteSession("current");
@@ -113,11 +109,6 @@ export async function signOutAccount() {
   }
 }
 
-// ============================================================
-// POSTS
-// ============================================================
-
-// ============================== CREATE POST
 export async function createPost(post: INewPost) {
   try {
     // Upload file to appwrite storage
@@ -196,7 +187,6 @@ export function getFilePreview(fileId: string) {
   }
 }
 
-// ============================== DELETE FILE
 export async function deleteFile(fileId: string) {
   try {
     await storage.deleteFile(appwriteConfig.storageId, fileId);
@@ -207,7 +197,6 @@ export async function deleteFile(fileId: string) {
   }
 }
 
-// ============================== GET POSTS
 export async function searchPosts(searchTerm: string) {
   try {
     const posts = await databases.listDocuments(
@@ -246,7 +235,6 @@ export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
   }
 }
 
-// ============================== GET POST BY ID
 export async function getPostById(postId?: string) {
   if (!postId) throw Error;
 
@@ -265,7 +253,6 @@ export async function getPostById(postId?: string) {
   }
 }
 
-// ============================== UPDATE POST
 export async function updatePost(post: IUpdatePost) {
   const hasFileToUpdate = post.file.length > 0;
 
